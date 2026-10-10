@@ -1,0 +1,1212 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080910">
+<title>ALDIANO — Creative Portfolio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #080910;
+  --panel: #11131e;
+  --text: #f6f7ff;
+  --muted: #a0a4b8;
+  --blue: #7c83ff;
+  --cyan: #64e5ff;
+  --border: rgba(255,255,255,.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.container {
+  width: min(1120px, 90%);
+  margin: auto;
+}
+
+/* NAVIGATION */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,9,16,.88);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  min-height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: var(--blue);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #c2c5d5;
+  font-size: 13px;
+  transition: .3s;
+}
+
+.nav-links a:hover {
+  color: var(--cyan);
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  color: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  min-height: 660px;
+  padding: 90px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  right: -100px;
+  top: 30px;
+  background: #5544ff;
+  filter: blur(160px);
+  opacity: .18;
+  border-radius: 50%;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 45px;
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 10px 15px;
+  color: var(--cyan);
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #68f0bd;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #68f0bd;
+}
+
+.hero h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(45px, 7vw, 82px);
+  line-height: 1;
+  letter-spacing: -5px;
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #9b8cff, #63e8ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-desc {
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 14px;
+  max-width: 500px;
+  margin: 25px 0;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, #7775ff, #4e9fff);
+  border: none;
+  color: white;
+}
+
+.btn-outline {
+  background: rgba(255,255,255,.03);
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 35px #625aff25;
+}
+
+/* PROFILE VISUAL */
+.hero-visual {
+  position: relative;
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+}
+
+.orbit {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #8588ff50;
+  border-radius: 50%;
+  position: absolute;
+  animation: rotate 20s linear infinite;
+}
+
+.orbit::before {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background: var(--cyan);
+  border-radius: 50%;
+  top: 40px;
+  left: 28px;
+  box-shadow: 0 0 25px var(--cyan);
+}
+
+.orbit.two {
+  width: 370px;
+  height: 370px;
+  border-color: #64e5ff22;
+  animation-direction: reverse;
+}
+
+.orbit.two::before {
+  background: var(--blue);
+  top: 180px;
+  left: -6px;
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.profile-card {
+  position: relative;
+  width: min(290px, 85%);
+  aspect-ratio: 4 / 5;
+  border: 1px solid #7775ff65;
+  border-radius: 25px;
+  background:
+    radial-gradient(ellipse at 70% 20%, #5146a7 0%, transparent 40%),
+    linear-gradient(145deg, #20223c, #0c101c 75%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 25px;
+  box-shadow: 0 30px 100px #0008;
+  transform: rotate(3deg);
+  transition: .4s;
+}
+
+.profile-card:hover {
+  transform: rotate(0) translateY(-7px);
+}
+
+.profile-card::before {
+  content: "A";
+  position: absolute;
+  top: -45px;
+  right: -5px;
+  font-size: 280px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  line-height: 1;
+  color: #ffffff0b;
+}
+
+.card-symbol {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+}
+
+.profile-card h2 {
+  position: relative;
+  font-size: 31px;
+  letter-spacing: -1px;
+}
+
+.profile-card p {
+  position: relative;
+  color: #b4b9d0;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.card-bottom {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 25px;
+  padding-top: 17px;
+  border-top: 1px solid var(--border);
+  color: #aeb6d2;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+/* GENERAL SECTIONS */
+section {
+  padding: 85px 0;
+  scroll-margin-top: 75px;
+}
+
+.section-head {
+  margin-bottom: 38px;
+}
+
+.section-tag {
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(30px, 5vw, 47px);
+  letter-spacing: -2px;
+}
+
+.section-desc {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 14px;
+  margin-top: 14px;
+  max-width: 580px;
+}
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+}
+
+.about-text {
+  color: var(--muted);
+  line-height: 2;
+  font-size: 14px;
+}
+
+.about-text strong {
+  color: white;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 22px;
+  border-radius: 17px;
+}
+
+.stat h3 {
+  font-size: 26px;
+  color: var(--cyan);
+}
+
+.stat p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+/* SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.skill {
+  padding: 25px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #151827, #0b0d16);
+  border: 1px solid var(--border);
+  transition: .3s;
+}
+
+.skill:hover {
+  transform: translateY(-5px);
+  border-color: #7775ff80;
+}
+
+.skill-icon {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #7775ff1d;
+  font-size: 23px;
+  margin-bottom: 20px;
+}
+
+.skill h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.skill p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* PORTFOLIO */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 25px;
+}
+
+.filter-btn {
+  padding: 10px 16px;
+  background: #11131e;
+  color: #bfc2d4;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  color: white;
+  background: #6866ef;
+  border-color: #6866ef;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.project {
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  transition: .3s;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  border-color: #7c83ff80;
+}
+
+.project.hidden {
+  display: none;
+}
+
+.project-art {
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 25px;
+  isolation: isolate;
+}
+
+.project-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(130deg, transparent 35%, #ffffff15);
+  z-index: -1;
+}
+
+.art-branding {
+  background: linear-gradient(135deg, #39271c, #a56a37);
+}
+
+.art-poster {
+  background: linear-gradient(135deg, #20246b, #8a49bc);
+}
+
+.art-photo {
+  background: linear-gradient(135deg, #173b42, #60bca0);
+}
+
+.art-video {
+  background: linear-gradient(135deg, #451e36, #e26877);
+}
+
+.project-art small {
+  letter-spacing: 4px;
+  font-size: 10px;
+  color: #ffffffc9;
+}
+
+.project-art strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(28px, 5vw, 47px);
+  line-height: 1.05;
+  margin: 16px 0;
+}
+
+.project-art span {
+  font-size: 11px;
+  color: #ffffffd0;
+}
+
+.project-info {
+  padding: 21px;
+}
+
+.project-info h3 {
+  font-size: 17px;
+  margin-bottom: 9px;
+}
+
+.project-info p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+  color: var(--cyan);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+/* JOURNEY */
+.timeline {
+  border-left: 1px solid #5559b0;
+  padding-left: 27px;
+  display: grid;
+  gap: 25px;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 23px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--cyan);
+  left: -33px;
+  top: 28px;
+  box-shadow: 0 0 15px var(--cyan);
+}
+
+.timeline-item small {
+  color: var(--cyan);
+  font-size: 11px;
+}
+
+.timeline-item h3 {
+  margin: 10px 0;
+}
+
+.timeline-item p {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+/* CONTACT */
+.contact-box {
+  text-align: center;
+  padding: 60px 25px;
+  border: 1px solid #7775ff55;
+  border-radius: 28px;
+  background:
+    radial-gradient(ellipse at top, #5546a22b, transparent 70%),
+    var(--panel);
+}
+
+.contact-box .section-title {
+  max-width: 650px;
+  margin: auto;
+}
+
+.contact-box .section-desc {
+  margin: 18px auto 27px;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+#copyMessage {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--cyan);
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* ANIMATIONS */
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE */
+@media (max-width: 760px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    padding: 25px 5%;
+    background: #0b0d17;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .hero {
+    padding: 65px 0;
+  }
+
+  .hero-grid,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-grid {
+    gap: 25px;
+  }
+
+  .hero h1 {
+    letter-spacing: -3px;
+  }
+
+  .hero-visual {
+    min-height: 400px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  section {
+    padding: 65px 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .orbit {
+    width: 250px;
+    height: 250px;
+  }
+
+  .orbit.two {
+    width: 320px;
+    height: 320px;
+  }
+
+  .profile-card {
+    width: 250px;
+  }
+
+  .project-art {
+    min-height: 210px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGASI -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#home" class="logo">ALDIANO<span>.</span></a>
+
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="Buka menu" aria-expanded="false">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Beranda</a>
+      <a href="#about">Tentang</a>
+      <a href="#skills">Keahlian</a>
+      <a href="#projects">Proyek</a>
+      <a href="#journey">Perjalanan</a>
+      <a href="#contact">Kontak</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+
+    <div class="hero-content reveal">
+      <div class="eyebrow">
+        <span class="dot"></span>
+        CREATIVE MIND · VISUAL STORYTELLER
+      </div>
+
+      <h1>
+        HELLO,<br>
+        I'M <span class="gradient-text">ALDIANO.</span>
+      </h1>
+
+      <p class="hero-desc">
+        Saya pelajar Desain Komunikasi Visual yang tertarik
+        pada desain grafis, branding, fotografi, videografi,
+        dan editing video. Saya percaya setiap ide memiliki
+        cerita yang layak untuk divisualisasikan.
+      </p>
+
+      <div class="buttons">
+        <a href="#projects" class="btn btn-primary">Lihat Karya ↗</a>
+        <a href="#about" class="btn btn-outline">Tentang Saya</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="orbit"></div>
+      <div class="orbit two"></div>
+
+      <div class="profile-card">
+        <div class="card-symbol">VISUAL DESIGNER / 001</div>
+        <h2>Think.<br>Create.<br><span class="gradient-text">Inspire.</span></h2>
+        <p>Turning ideas into visual experiences.</p>
+        <div class="card-bottom">
+          <span>CREATIVE PORTFOLIO</span>
+          <span>2026 ↗</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TENTANG SAYA -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">01 / ABOUT ME</div>
+      <h2 class="section-title">
+        Mengenal <span class="gradient-text">Saya.</span>
+      </h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          Halo! Saya <strong>Aldiano</strong>, pelajar Desain
+          Komunikasi Visual yang kreatif, teliti, dan memiliki
+          minat besar dalam dunia visual.
+        </p>
+        <br>
+        <p>
+          Saya tertarik mempelajari warna, tipografi,
+          komposisi, fotografi, dan video untuk menyampaikan
+          pesan secara menarik. Saya senang menggambar,
+          membaca, mencoba ide baru, dan mengembangkan
+          kemampuan desain.
+        </p>
+        <br>
+        <p>
+          Tujuan saya adalah terus belajar, membangun
+          portofolio berkualitas, dan menghasilkan karya
+          visual yang memiliki karakter serta makna.
+        </p>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat">
+          <h3>01</h3>
+          <p>Creative Thinking</p>
+        </div>
+        <div class="stat">
+          <h3>02</h3>
+          <p>Visual Storytelling</p>
+        </div>
+        <div class="stat">
+          <h3>03</h3>
+          <p>Continuous Learning</p>
+        </div>
+        <div class="stat">
+          <h3>04</h3>
+          <p>Attention to Detail</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEAHLIAN -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">02 / WHAT I DO</div>
+      <h2 class="section-title">
+        Creative <span class="gradient-text">Skills.</span>
+      </h2>
+      <p class="section-desc">
+        Bidang yang saya minati dan terus saya kembangkan
+        untuk menghasilkan karya yang lebih baik.
+      </p>
+    </div>
+
+    <div class="skills-grid">
+      <article class="skill reveal">
+        <div class="skill-icon">✳</div>
+        <h3>Graphic Design</h3>
+        <p>Mengolah warna, tipografi, layout, dan elemen visual.</p>
+      </article>
+
+      <article class="skill reveal">
+        <div class="skill-icon">◈</div>
+        <h3>Branding & Logo</h3>
+        <p>Mengeksplorasi identitas visual dan karakter sebuah merek.</p>
+      </article>
+
+      <article class="skill reveal">
+        <div class="skill-icon">◎</div>
+        <h3>Photography</h3>
+        <p>Mempelajari komposisi, pencahayaan, dan storytelling.</p>
+      </article>
+
+      <article class="skill reveal">
+        <div class="skill-icon">▶</div>
+        <h3>Videography</h3>
+        <p>Mengembangkan ide dan pengambilan gambar untuk video.</p>
+      </article>
+
+      <article class="skill reveal">
+        <div class="skill-icon">⌘</div>
+        <h3>Video Editing</h3>
+        <p>Menyusun footage, transisi, audio, dan warna video.</p>
+      </article>
+
+      <article class="skill reveal">
+        <div class="skill-icon">✎</div>
+        <h3>Illustration</h3>
+        <p>Mengeksplorasi ilustrasi dan gaya visual sendiri.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI PROYEK -->
+<section id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">03 / SELECTED WORKS</div>
+      <h2 class="section-title">
+        Karya <span class="gradient-text">Pilihan.</span>
+      </h2>
+      <p class="section-desc">
+        Galeri contoh proyek kreatif. Ganti dengan karya
+        asli kamu saat portofolio siap dipublikasikan.
+      </p>
+    </div>
+
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">Semua</button>
+      <button class="filter-btn" data-filter="branding">Branding</button>
+      <button class="filter-btn" data-filter="poster">Poster</button>
+      <button class="filter-btn" data-filter="photo">Fotografi</button>
+      <button class="filter-btn" data-filter="video">Videografi</button>
+    </div>
+
+    <div class="projects-grid">
+
+      <article class="project reveal" data-category="branding">
+        <div class="project-art art-branding">
+          <small>BRAND IDENTITY / 001</small>
+          <strong>ARASI<br>SIDIKALANG</strong>
+          <span>ORIGIN · CHARACTER · COFFEE</span>
+        </div>
+        <div class="project-info">
+          <h3>Arasi Coffee Identity</h3>
+          <p>Konsep identitas merek kopi dengan inspirasi karakter lokal.</p>
+          <div class="project-meta">
+            <span>BRANDING</span>
+            <span>CONCEPT ↗</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal" data-category="poster">
+        <div class="project-art art-poster">
+          <small>VISUAL CAMPAIGN / 002</small>
+          <strong>CREATE<br>YOUR FUTURE</strong>
+          <span>IDEAS HAVE NO LIMITS</span>
+        </div>
+        <div class="project-info">
+          <h3>Creative Future Poster</h3>
+          <p>Konsep poster dengan tipografi dan komposisi modern.</p>
+          <div class="project-meta">
+            <span>POSTER DESIGN</span>
+            <span>CONCEPT ↗</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal" data-category="photo">
+        <div class="project-art art-photo">
+          <small>PHOTO SERIES / 003</small>
+          <strong>LIGHT<br>& MOMENTS</strong>
+          <span>CAPTURE THE STORY</span>
+        </div>
+        <div class="project-info">
+          <h3>Visual Photography</h3>
+          <p>Konsep fotografi yang mengeksplorasi cahaya dan suasana.</p>
+          <div class="project-meta">
+            <span>PHOTOGRAPHY</span>
+            <span>CONCEPT ↗</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal" data-category="video">
+        <div class="project-art art-video">
+          <small>MOTION / 004</small>
+          <strong>FRAME<br>BY FRAME</strong>
+          <span>EVERY FRAME TELLS A STORY</span>
+         </div>
+        <div class="project-info">
+          <h3>Video Storytelling</h3>
+          <p>Konsep video pendek dengan fokus pada framing dan editing.</p>
+          <div class="project-meta">
+            <span>VIDEOGRAPHY</span>
+            <span>CONCEPT ↗</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PERJALANAN -->
+<section id="journey">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">04 / MY JOURNEY</div>
+      <h2 class="section-title">
+        Proses <span class="gradient-text">Bertumbuh.</span>
+      </h2>
+      <p class="section-desc">
+        Langkah untuk terus berkembang dalam bidang desain.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <article class="timeline-item reveal">
+        <small>STEP 01 / LEARN</small>
+        <h3>Membangun Fondasi Desain</h3>
+        <p>Mempelajari prinsip desain, tipografi, teori warna, komposisi, dan software desain.</p>
+      </article>
+
+      <article class="timeline-item reveal">
+        <small>STEP 02 / EXPLORE</small>
+        <h3>Eksplorasi Gaya Visual</h3>
+        <p>Mencoba pendekatan branding, poster, fotografi, videografi, dan editing.</p>
+      </article>
+
+      <article class="timeline-item reveal">
+        <small>STEP 03 / CREATE</small>
+        <h3>Membangun Portofolio</h3>
+        <p>Mendokumentasikan proses kreatif dan menyusun proyek terbaik.</p>
+      </article>
+
+      <article class="timeline-item reveal">
+        <small>STEP 04 / GROW</small>
+        <h3>Menjadi Kreator Profesional</h3>
+        <p>Meningkatkan kualitas karya, komunikasi, kolaborasi, dan pengalaman.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-box reveal">
+      <div class="section-tag">05 / GET IN TOUCH</div>
+      <h2 class="section-title">
+        Punya Ide <span class="gradient-text">Menarik?</span>
+      </h2>
+
+      <p class="section-desc">
+        Mari bertukar ide, berdiskusi tentang desain,
+        atau berkolaborasi dalam proyek kreatif.
+      </p>
+
+      <div class="contact-buttons">
+        <a class="btn btn-primary" id="emailLink"
+           href="mailto:Aldixmlaldiml@gmail.com">
+          ✉ Hubungi Saya 083180538498
+        </a>
+
+        <button class="btn btn-outline" id="copyEmail">
+          Salin Email
+        </button>
+
+        <a class="btn btn-outline"
+           href="https://www.instagram.com/aldianoz_/"
+           target="_blank" rel="noopener noreferrer">
+          Instagram ↗
+        </a>
+      </div>
+
+      <p id="copyMessage" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> ALDIANO. All rights reserved.</p>
+    <p>Designed with creativity & passion ✦</p>
+  </div>
+</footer>
+
+<script>
+// MENU NAVIGASI HP
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", isOpen);
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+  });
+});
+
+// FILTER GALERI
+const filterButtons = document.querySelectorAll(".filter-btn");
+const projects = document.querySelectorAll(".project");
+
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+
+    const filter = button.dataset.filter;
+
+    projects.forEach(project => {
+      const matches =
+        filter === "all" ||
+        project.dataset.category === filter;
+
+      project.classList.toggle("hidden", !matches);
+    });
+  });
+});
+
+// ANIMASI SCROLL
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+  });
+} else {
+  document.querySelectorAll(".reveal").forEach(element => {
+    element.classList.add("visible");
+  });
+}
+
+// TAHUN OTOMATIS
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+// KONTAK EMAIL
+// Ganti dengan email milikmu sendiri.
+const emailKamu = "emailkamu@example.com";
+
+document.getElementById("emailLink").href =
+  "mailto:" + emailKamu;
+
+document.getElementById("copyEmail").addEventListener("click", async () => {
+  const message = document.getElementById("copyMessage");
+
+  try {
+    await navigator.clipboard.writeText(emailKamu);
+    message.textContent = "Email berhasil disalin!";
+  } catch (error) {
+    message.textContent = "Email: " + emailKamu;
+  }
+});
+</script>
+
+</body>
+</html>
+```
