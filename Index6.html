@@ -1,0 +1,473 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050914">
+<title>ALDIANO | Neon Calculator</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --blue: #168cff;
+    --cyan: #68caff;
+    --bg: #050914;
+    --panel: #0c1426;
+}
+
+body {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background:
+        radial-gradient(ellipse at 50% 0%, #16396a 0%, transparent 55%),
+        radial-gradient(ellipse at bottom, #10204b 0%, transparent 60%),
+        var(--bg);
+}
+
+.calculator {
+    width: 100%;
+    max-width: 390px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    border: 1px solid #318bff;
+    background: linear-gradient(145deg, #121e36, #050914 75%);
+    box-shadow: 0 0 35px #087cff35,
+                inset 0 0 25px #1675ff12;
+}
+
+.calculator::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    background: #168cff;
+    filter: blur(100px);
+    opacity: .18;
+    pointer-events: none;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.brand {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.brand span {
+    display: block;
+    margin-top: 6px;
+    color: var(--cyan);
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.status {
+    color: #6affb3;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.display {
+    position: relative;
+    padding: 17px 15px;
+    border: 1px solid #244a81;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #060b17, #101a31);
+    box-shadow: inset 0 0 20px #006dff12;
+    margin-bottom: 20px;
+}
+
+.display-label {
+    color: var(--cyan);
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+/* NAMA ALDIANO DI TENGAH */
+.center-name {
+    text-align: center;
+    padding: 22px 0 20px;
+}
+
+.center-name h1 {
+    font-size: clamp(30px, 9vw, 43px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    background: linear-gradient(
+        90deg, #438fff, #ffffff, #46caff
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 12px #168aff75);
+    animation: glow 3s infinite alternate;
+}
+
+.center-name p {
+    margin-top: 10px;
+    color: var(--cyan);
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 5px #168aff35); }
+    to { filter: drop-shadow(0 0 16px #168affaa); }
+}
+
+.expression {
+    min-height: 22px;
+    color: #8ca4ca;
+    font-size: 13px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.result {
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    font-size: clamp(30px, 8vw, 42px);
+    font-weight: bold;
+    text-shadow: 0 0 15px #4c9dff55;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    position: relative;
+}
+
+button {
+    min-width: 0;
+    height: 62px;
+    border: 1px solid #263d66;
+    border-radius: 17px;
+    background: linear-gradient(145deg, #1b2945, #0b1223);
+    color: #edf5ff;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 10px #0005;
+    transition: transform .15s, box-shadow .2s, border-color .2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:hover {
+    border-color: #45a5ff;
+    box-shadow: 0 0 17px #1484ff55;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: scale(.93);
+}
+
+.function {
+    color: #69bdff;
+    background: #14243c;
+}
+
+.operator {
+    color: #64baff;
+    border-color: #1765c8;
+    background: linear-gradient(145deg, #123b78, #081a3b);
+}
+
+.equal {
+    color: white;
+    border-color: #73bdff;
+    background: linear-gradient(135deg, #198cff, #4135ef);
+    box-shadow: 0 0 16px #147dff55;
+}
+
+.zero {
+    grid-column: span 2;
+}
+
+.footer {
+    margin-top: 22px;
+    padding-top: 17px;
+    border-top: 1px solid #203451;
+    text-align: center;
+    color: #6296d4;
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 2;
+}
+
+.footer strong {
+    color: white;
+}
+
+@media (max-width: 360px) {
+    .calculator { padding: 14px; }
+    .buttons { gap: 7px; }
+    button { height: 55px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+    <div class="top">
+        <div class="brand">
+            KALKULATOR
+            <span>by Aldiano</span>
+        </div>
+        <div class="status">● ONLINE</div>
+    </div>
+
+    <div class="display">
+        <div class="display-label">✦ ALDIANO SYSTEM</div>
+
+        <div class="center-name">
+            <h1>ALDIANO</h1>
+            <p>SMALL STEPS • BIG DREAMS</p>
+        </div>
+
+        <div class="expression" id="expression">
+            SIAP MENGHITUNG
+        </div>
+
+        <div class="result" id="result">0</div>
+    </div>
+
+    <div class="buttons">
+        <button class="function" onclick="clearAll()">AC</button>
+        <button class="function" onclick="backspace()">⌫</button>
+        <button class="function" onclick="percent()">%</button>
+        <button class="operator" onclick="choose('/')">÷</button>
+
+        <button onclick="digit('7')">7</button>
+        <button onclick="digit('8')">8</button>
+        <button onclick="digit('9')">9</button>
+        <button class="operator" onclick="choose('*')">×</button>
+
+        <button onclick="digit('4')">4</button>
+        <button onclick="digit('5')">5</button>
+        <button onclick="digit('6')">6</button>
+        <button class="operator" onclick="choose('-')">−</button>
+
+        <button onclick="digit('1')">1</button>
+        <button onclick="digit('2')">2</button>
+        <button onclick="digit('3')">3</button>
+        <button class="operator" onclick="choose('+')">+</button>
+
+        <button class="function" onclick="toggleSign()">±</button>
+        <button class="zero" onclick="digit('0')">0</button>
+        <button onclick="digit('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+
+    <div class="footer">
+        <strong>ALDIANO</strong><br>
+        &lt; HTML • CSS • JS &gt;<br>
+        CEPAT • MODERN • AKURAT
+    </div>
+
+</div>
+
+<script>
+const resultDisplay = document.getElementById("result");
+const expressionDisplay = document.getElementById("expression");
+
+let current = "0";
+let previous = null;
+let operator = null;
+let resetNext = false;
+let expressionText = "";
+
+function updateDisplay() {
+    resultDisplay.textContent = current;
+}
+
+function formatNumber(number) {
+    if (!Number.isFinite(number)) return "Error";
+    return String(Number(number.toPrecision(12)));
+}
+
+function digit(value) {
+    if (current === "Error") clearAll();
+
+    if (resetNext) {
+        current = value === "." ? "0." : value;
+        resetNext = false;
+        updateDisplay();
+        return;
+    }
+
+    if (value === "." && current.includes(".")) return;
+
+    if (current === "0" && value !== ".") {
+        current = value;
+    } else if (current.replace("-", "").length < 15) {
+        current += value;
+    }
+
+    updateDisplay();
+}
+
+function clearAll() {
+    current = "0";
+    previous = null;
+    operator = null;
+    resetNext = false;
+    expressionText = "";
+
+    expressionDisplay.textContent = "SIAP MENGHITUNG";
+    updateDisplay();
+}
+
+function backspace() {
+    if (current === "Error" || resetNext) {
+        current = "0";
+        resetNext = false;
+    } else {
+        current = current.length > 1
+            ? current.slice(0, -1)
+            : "0";
+
+        if (current === "-") current = "0";
+    }
+
+    updateDisplay();
+}
+
+function choose(op) {
+    if (current === "Error") return;
+
+    if (operator !== null && !resetNext) {
+        calculate();
+    }
+
+    previous = Number(current);
+    operator = op;
+    expressionText = current + " " + symbol(op);
+    expressionDisplay.textContent = expressionText;
+    resetNext = true;
+}
+
+function symbol(op) {
+    return {
+        "+": "+",
+        "-": "−",
+        "*": "×",
+        "/": "÷"
+    }[op] || op;
+}
+
+function calculate() {
+    if (operator === null || previous === null ||
+        current === "Error") return;
+
+    const a = previous;
+    const b = Number(current);
+    let answer;
+
+    switch (operator) {
+        case "+":
+            answer = a + b;
+            break;
+        case "-":
+            answer = a - b;
+            break;
+        case "*":
+            answer = a * b;
+            break;
+        case "/":
+            if (b === 0) {
+                current = "Error";
+                expressionDisplay.textContent =
+                    "Tidak bisa membagi dengan nol";
+                previous = null;
+                operator = null;
+                resetNext = true;
+                updateDisplay();
+                return;
+            }
+            answer = a / b;
+            break;
+    }
+
+    expressionDisplay.textContent =
+        a + " " + symbol(operator) + " " + b + " =";
+
+    current = formatNumber(answer);
+    previous = null;
+    operator = null;
+    resetNext = true;
+    updateDisplay();
+}
+
+function percent() {
+    if (current === "Error") return;
+
+    current = formatNumber(Number(current) / 100);
+    updateDisplay();
+}
+
+function toggleSign() {
+    if (current === "Error" || Number(current) === 0) return;
+
+    current = current.startsWith("-")
+        ? current.slice(1)
+        : "-" + current;
+
+    updateDisplay();
+}
+
+// Dukungan keyboard laptop dan komputer
+document.addEventListener("keydown", function(event) {
+    const key = event.key;
+
+    if (/^[0-9.]$/.test(key)) {
+        digit(key);
+    } else if (["+", "-", "*", "/"].includes(key)) {
+        event.preventDefault();
+        choose(key);
+    } else if (key === "Enter" || key === "=") {
+        event.preventDefault();
+        calculate();
+    } else if (key === "Backspace") {
+        backspace();
+    } else if (key === "Escape") {
+        clearAll();
+    } else if (key === "%") {
+        percent();
+    }
+});
+</script>
+
+</body>
+</html>
+```
