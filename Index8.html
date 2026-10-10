@@ -1,0 +1,641 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090914">
+<title>VIBE LYRICS | Music Experience</title>
+
+<style>
+:root {
+  --bg: #090914;
+  --panel: #141426;
+  --purple: #a855f7;
+  --blue: #38bdf8;
+  --muted: #a5a5bd;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -100px auto auto -100px;
+  width: 350px;
+  height: 350px;
+  background: #7c3aed;
+  filter: blur(150px);
+  opacity: .25;
+  pointer-events: none;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #090914eF;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #28283e;
+  padding: 20px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #c084fc, #38bdf8);
+  color: transparent;
+  background-clip: text;
+}
+
+header small {
+  color: var(--muted);
+}
+
+main {
+  width: min(1050px, 92%);
+  margin: 45px auto;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 60px);
+  line-height: 1.12;
+}
+
+.gradient {
+  background: linear-gradient(90deg, #c084fc, #38bdf8);
+  color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-top: 15px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 22px;
+}
+
+.panel {
+  min-width: 0;
+  background: #141426eF;
+  border: 1px solid #2b2b43;
+  border-radius: 22px;
+  padding: 23px;
+}
+
+.panel h2 {
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.search-row {
+  display: flex;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+input, textarea {
+  width: 100%;
+  background: #0b0b18;
+  color: white;
+  border: 1px solid #35354e;
+  border-radius: 10px;
+  padding: 13px;
+  font: inherit;
+  outline: none;
+  min-width: 0;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--purple);
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(120deg, #9333ea, #4f46e5);
+  color: white;
+  padding: 12px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+}
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.secondary {
+  background: #26263d;
+  border: 1px solid #3c3c57;
+}
+
+.hint {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 12px 0 20px;
+}
+
+.player {
+  overflow: hidden;
+  border-radius: 14px;
+  background: #0b0b18;
+  min-height: 166px;
+}
+
+.player iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  min-height: 166px;
+}
+
+.empty {
+  min-height: 166px;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.now-playing {
+  margin: 18px 0;
+  padding: 14px;
+  border-radius: 12px;
+  background: #1b1b31;
+  overflow-wrap: anywhere;
+}
+
+.now-playing small {
+  color: var(--muted);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.lyrics {
+  background: #0b0b18;
+  border: 1px solid #292940;
+  border-radius: 15px;
+  padding: 18px;
+  min-height: 300px;
+  max-height: 420px;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.lyric-line {
+  color: #77778f;
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 18px 0;
+  transition: .25s;
+}
+
+.lyric-line.active {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 18px #a855f7;
+}
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+.lyric-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.status {
+  color: #c4b5fd;
+  font-size: 12px;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  color: #77778f;
+  border-top: 1px solid #25253a;
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  header {
+    padding: 17px 5%;
+  }
+
+  header small {
+    display: none;
+  }
+
+  main {
+    margin: 30px auto;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="logo">VIBE LYRICS.</div>
+  <small>YOUR MUSIC EXPERIENCE ♫</small>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Feel the Music.<br>
+      <span class="gradient">Live the Lyrics.</span>
+    </h1>
+    <p>
+      Cari lagu di SoundCloud, dengarkan musik, dan tampilkan
+      lirik buatan sendiri atau lirik yang kamu punya izin untuk gunakan.
+    </p>
+  </section>
+
+  <div class="layout">
+    <section class="panel">
+      <h2>🎧 Cari Lagu</h2>
+
+      <form id="searchForm" class="search-row">
+        <input id="searchInput"
+          placeholder="Contoh: nama lagu atau artis"
+          aria-label="Cari lagu di SoundCloud"
+          required>
+        <button type="submit">Cari ↗</button>
+      </form>
+
+      <p class="hint">
+        Tombol Cari membuka hasil pencarian SoundCloud di tab baru.
+        Pilih lagu, lalu salin URL lagu tersebut.
+      </p>
+
+      <h2>▶ Putar Lagu</h2>
+
+      <form id="loadForm" class="search-row">
+        <input id="trackUrl"
+          type="url"
+          placeholder="Tempel URL lagu SoundCloud"
+          aria-label="URL lagu SoundCloud"
+          required>
+        <button type="submit">Muat</button>
+      </form>
+
+      <div class="player" id="player">
+        <div class="empty">
+          ♫<br>
+          Tempel URL lagu SoundCloud untuk memulai.
+        </div>
+      </div>
+
+      <div class="now-playing">
+        <small>SEDANG DIPILIH</small>
+        <strong id="trackTitle">Belum ada lagu</strong>
+      </div>
+
+      <div class="action-row">
+        <button class="secondary" id="openTrack" disabled>
+          Buka di SoundCloud ↗
+        </button>
+        <button class="secondary" id="clearTrack">
+          Hapus lagu
+        </button>
+      </div>
+
+      <p class="status" id="playerStatus" role="status">
+        Pemutar siap digunakan.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>🎤 Tampilan Lirik</h2>
+
+      <div class="lyrics" id="lyrics">
+        <p class="lyric-line" data-time="0">Senja datang menyapa</p>
+        <p class="lyric-line" data-time="5">Membawa cerita yang lama</p>
+        <p class="lyric-line" data-time="10">Langkah kecil menuju cahaya</p>
+        <p class="lyric-line" data-time="15">Menemukan mimpi yang kupunya</p>
+        <p class="lyric-line" data-time="20">Biar waktu terus berjalan</p>
+        <p class="lyric-line" data-time="25">Harapan tak akan menghilang</p>
+        <p class="lyric-line" data-time="30">Di bawah langit penuh bintang</p>
+        <p class="lyric-line" data-time="35">Esok kita mulai lagi</p>
+      </div>
+
+      <p class="hint">
+        Contoh di atas adalah lirik original. Kamu dapat menggantinya
+        dengan lirik yang kamu tulis sendiri atau punya izin untuk digunakan.
+      </p>
+
+      <details>
+        <summary style="cursor:pointer;color:#c4b5fd">
+          Edit lirik dan waktu
+        </summary>
+
+        <p class="hint">
+          Format setiap baris: waktu dalam detik | teks lirik.
+          Contoh: 0 | Awal lagu saya
+        </p>
+
+        <textarea id="lyricsInput"
+          aria-label="Editor lirik dan waktu">0 | Senja datang menyapa
+5 | Membawa cerita yang lama
+10 | Langkah kecil menuju cahaya
+15 | Menemukan mimpi yang kupunya
+20 | Biar waktu terus berjalan
+25 | Harapan tak akan menghilang
+30 | Di bawah langit penuh bintang
+35 | Esok kita mulai lagi</textarea>
+
+        <div class="lyric-buttons">
+          <button id="applyLyrics">Terapkan lirik</button>
+          <button class="secondary" id="resetLyrics">Reset contoh</button>
+        </div>
+      </details>
+
+      <p class="status" id="lyricStatus" role="status">
+        Lirik contoh dimuat.
+      </p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  VIBE LYRICS © <span id="year"></span> · Music powered by SoundCloud
+</footer>
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+
+$("year").textContent = new Date().getFullYear();
+
+let widget = null;
+let currentUrl = "";
+let lyricsData = [];
+
+const defaultLyrics = [
+  [0, "Senja datang menyapa"],
+  [5, "Membawa cerita yang lama"],
+  [10, "Langkah kecil menuju cahaya"],
+  [15, "Menemukan mimpi yang kupunya"],
+  [20, "Biar waktu terus berjalan"],
+  [25, "Harapan tak akan menghilang"],
+  [30, "Di bawah langit penuh bintang"],
+  [35, "Esok kita mulai lagi"]
+];
+
+function searchSoundCloud(query) {
+  const url =
+    "https://soundcloud.com/search/sounds?q=" +
+    encodeURIComponent(query);
+
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+$("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const query = $("searchInput").value.trim();
+
+  if (query) searchSoundCloud(query);
+});
+
+function validSoundCloudUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" &&
+      (url.hostname === "soundcloud.com" ||
+       url.hostname === "www.soundcloud.com" ||
+       url.hostname === "m.soundcloud.com");
+  } catch {
+    return false;
+  }
+}
+
+function loadTrack(value) {
+  const url = value.trim();
+
+  if (!validSoundCloudUrl(url)) {
+    $("playerStatus").textContent =
+      "Masukkan URL HTTPS dari soundcloud.com yang valid.";
+    return;
+  }
+
+  currentUrl = url;
+  $("trackTitle").textContent = "Memuat pemutar...";
+  $("openTrack").disabled = false;
+  $("playerStatus").textContent =
+    "Memuat pemutar SoundCloud...";
+
+  const embedUrl =
+    "https://w.soundcloud.com/player/?url=" +
+    encodeURIComponent(url) +
+    "&color=%23a855f7&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true";
+
+  $("player").innerHTML = "";
+
+  const iframe = document.createElement("iframe");
+  iframe.title = "Pemutar musik SoundCloud";
+  iframe.allow = "autoplay";
+  iframe.scrolling = "no";
+  iframe.height = "300";
+  iframe.src = embedUrl;
+
+  $("player").appendChild(iframe);
+
+  if (window.SC && SC.Widget) {
+    widget = SC.Widget(iframe);
+
+    widget.bind(SC.Widget.Events.READY, () => {
+      $("playerStatus").textContent =
+        "Pemutar siap. Tekan tombol play pada pemutar SoundCloud.";
+
+      widget.getCurrentSound(sound => {
+        if (sound && sound.title) {
+          $("trackTitle").textContent = sound.title;
+        } else {
+          $("trackTitle").textContent = "Lagu SoundCloud";
+        }
+      });
+    });
+
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS, data => {
+      const seconds = data.currentPosition / 1000;
+      highlightLyric(seconds);
+    });
+
+    widget.bind(SC.Widget.Events.ERROR, () => {
+      $("playerStatus").textContent =
+        "Lagu tidak dapat diputar. Coba URL lain atau buka di SoundCloud.";
+    });
+  }
+}
+
+$("loadForm").addEventListener("submit", event => {
+  event.preventDefault();
+  loadTrack($("trackUrl").value);
+});
+
+$("openTrack").addEventListener("click", () => {
+  if (currentUrl) {
+    window.open(currentUrl, "_blank", "noopener,noreferrer");
+  }
+});
+
+$("clearTrack").addEventListener("click", () => {
+  currentUrl = "";
+  widget = null;
+  $("trackUrl").value = "";
+  $("player").innerHTML =
+    '<div class="empty">♫<br>Tempel URL SoundCloud untuk memulai.</div>';
+  $("trackTitle").textContent = "Belum ada lagu";
+  $("playerStatus").textContent = "Pemutar siap digunakan.";
+  $("openTrack").disabled = true;
+});
+
+function renderLyrics(data) {
+  lyricsData = data;
+  const container = $("lyrics");
+  container.innerHTML = "";
+
+  data.forEach(([time, text], index) => {
+    const line = document.createElement("p");
+    line.className = "lyric-line";
+    line.dataset.time = time;
+    line.textContent = text;
+    container.appendChild(line);
+  });
+
+  $("lyricStatus").textContent =
+    data.length + " baris lirik berhasil dimuat.";
+}
+
+function highlightLyric(seconds) {
+  let activeIndex = -1;
+
+  lyricsData.forEach(([time], index) => {
+    if (seconds >= time) activeIndex = index;
+  });
+
+  document.querySelectorAll(".lyric-line").forEach((line, index) => {
+    const active = index === activeIndex;
+    line.classList.toggle("active", active);
+
+    if (active) {
+      line.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+  });
+}
+
+$("applyLyrics").addEventListener("click", () => {
+  const rows = $("lyricsInput").value.split("\n");
+  const result = [];
+
+  for (const row of rows) {
+    if (!row.trim()) continue;
+
+    const separator = row.indexOf("|");
+
+    if (separator < 0) {
+      $("lyricStatus").textContent =
+        "Format salah. Gunakan: detik | teks lirik";
+      return;
+    }
+
+    const time = Number(row.slice(0, separator).trim());
+    const text = row.slice(separator + 1).trim();
+
+    if (!Number.isFinite(time) || time < 0 || !text) {
+      $("lyricStatus").textContent =
+        "Waktu harus berupa angka positif dan teks tidak boleh kosong.";
+      return;
+    }
+
+    result.push([time, text]);
+  }
+
+  if (!result.length) {
+    $("lyricStatus").textContent = "Masukkan minimal satu baris lirik.";
+    return;
+  }
+
+  result.sort((a, b) => a[0] - b[0]);
+  renderLyrics(result);
+});
+
+$("resetLyrics").addEventListener("click", () => {
+  $("lyricsInput").value = defaultLyrics
+    .map(([time, text]) => `${time} | ${text}`)
+    .join("\n");
+
+  renderLyrics(defaultLyrics);
+});
+
+renderLyrics(defaultLyrics);
+</script>
+</body>
+</html>
+```
