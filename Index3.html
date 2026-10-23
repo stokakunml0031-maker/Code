@@ -1,0 +1,1299 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08090d">
+<title>ALDIANO® — Creative Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #08090d;
+  --panel: #11131a;
+  --white: #f5f5f2;
+  --muted: #9395a2;
+  --lime: #c9ff62;
+  --line: rgba(255,255,255,.11);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: .12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+}
+
+a { color: inherit; text-decoration: none; }
+
+button, input, textarea { font: inherit; }
+
+button { cursor: pointer; }
+
+::selection {
+  background: var(--lime);
+  color: #08090d;
+}
+
+.container {
+  width: min(1160px, 90%);
+  margin: auto;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  padding: 20px 0;
+  background: rgba(8,9,13,.76);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid transparent;
+  transition: .3s;
+}
+
+.navbar.scrolled {
+  border-bottom-color: var(--line);
+  padding: 14px 0;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font: 800 22px Syne, sans-serif;
+  letter-spacing: -1.5px;
+}
+
+.logo span { color: var(--lime); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: #c0c1ca;
+  font-size: 12px;
+  transition: .25s;
+}
+
+.nav-links a:hover { color: var(--lime); }
+
+.nav-contact {
+  border: 1px solid #c9ff6260;
+  border-radius: 50px;
+  padding: 10px 16px;
+  color: var(--lime) !important;
+}
+
+.menu-btn {
+  display: none;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: white;
+  padding: 9px 12px;
+  border-radius: 9px;
+}
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 145px 0 75px;
+  position: relative;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: #a0ff3720;
+  filter: blur(130px);
+  right: -170px;
+  top: 15%;
+  z-index: -1;
+  animation: aura 8s ease-in-out infinite alternate;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: .22;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 65px 65px;
+  mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+@keyframes aura {
+  from { transform: translate(0,0) scale(1); }
+  to { transform: translate(-80px,70px) scale(1.3); }
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--line);
+  border-radius: 50px;
+  padding: 9px 13px;
+  color: #d1d2d7;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 27px;
+  animation: fadeUp .8s both;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--lime);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--lime);
+}
+
+.hero h1 {
+  font: 800 clamp(48px, 7.6vw, 100px)/.99 Syne, sans-serif;
+  letter-spacing: -5px;
+  animation: fadeUp .8s .12s both;
+}
+
+.hero h1 .outline {
+  color: transparent;
+  -webkit-text-stroke: 1px #a3a5b0;
+}
+
+.hero h1 .accent { color: var(--lime); }
+
+.hero-desc {
+  max-width: 430px;
+  margin-top: 27px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+  animation: fadeUp .8s .24s both;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 31px;
+  animation: fadeUp .8s .36s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  padding: 14px 20px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  transition: .3s;
+}
+
+.btn-primary {
+  background: var(--lime);
+  color: #10120b;
+  border-color: var(--lime);
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 35px #c9ff6230;
+}
+
+.btn-secondary:hover {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+
+.hero-art {
+  min-height: 390px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  animation: fadeUp 1s .3s both;
+}
+
+.art-ring {
+  position: absolute;
+  width: min(360px, 90%);
+  aspect-ratio: 1;
+  border: 1px solid #c9ff6235;
+  border-radius: 50%;
+  animation: rotate 24s linear infinite;
+}
+
+.art-ring::before,
+.art-ring::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 25px var(--lime);
+}
+
+.art-ring::before { top: 13%; left: 18%; }
+.art-ring::after { bottom: 15%; right: 12%; }
+
+.art-card {
+  width: min(280px, 80%);
+  aspect-ratio: .82;
+  border: 1px solid #ffffff30;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  transform: rotate(-5deg);
+  background:
+    radial-gradient(circle at 70% 25%, #d4ff9a50, transparent 32%),
+    radial-gradient(circle at 20% 80%, #8b75ff42, transparent 42%),
+    linear-gradient(145deg, #272b34, #11131a);
+  box-shadow: 0 30px 90px #0009;
+  transition: transform .5s;
+}
+
+.art-card:hover { transform: rotate(0) scale(1.03); }
+
+.art-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.orb {
+  position: absolute;
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  right: -8px;
+  top: 28%;
+  background: linear-gradient(135deg, #e8ffb2, #92c63d 45%, #303f24);
+  box-shadow: inset -20px -20px 45px #17200d80,
+              0 0 65px #c9ff6240;
+  animation: float 5s ease-in-out infinite;
+}
+
+.orb::before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 1px solid #ffffff60;
+  border-radius: 50%;
+}
+
+.art-title {
+  z-index: 1;
+  font: 800 37px/.95 Syne, sans-serif;
+  letter-spacing: -2px;
+}
+
+.art-title span {
+  display: block;
+  color: var(--lime);
+}
+
+.art-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #c8cbd1;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+
+.floating-tag {
+  position: absolute;
+  right: -4px;
+  bottom: 22%;
+  border: 1px solid #ffffff20;
+  background: #161820d9;
+  backdrop-filter: blur(12px);
+  padding: 13px 16px;
+  border-radius: 10px;
+  font-size: 10px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.floating-tag strong {
+  color: var(--lime);
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+@keyframes rotate { to { transform: rotate(360deg); } }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-13px); }
+}
+
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+  background: #ffffff03;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+
+.marquee-track span {
+  font: 700 14px Syne, sans-serif;
+  letter-spacing: 3px;
+  padding-right: 40px;
+  color: #c7c8ce;
+}
+
+.marquee-track b { color: var(--lime); margin-right: 40px; }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+section.content-section { padding: 110px 0; }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 25px;
+  margin-bottom: 45px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--lime);
+  margin-bottom: 17px;
+}
+
+.section-title {
+  font: 700 clamp(35px, 5vw, 60px)/1.08 Syne, sans-serif;
+  letter-spacing: -2.5px;
+}
+
+.section-title span { color: var(--lime); }
+
+.section-copy {
+  max-width: 320px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.filters {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 27px;
+}
+
+.filter-btn {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: #b8bac4;
+  border-radius: 50px;
+  padding: 9px 15px;
+  font-size: 11px;
+  transition: .25s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--lime);
+  color: #11140b;
+  border-color: var(--lime);
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 22px;
+}
+
+.project {
+  min-width: 0;
+  transition: opacity .3s, transform .3s;
+}
+
+.project.hidden { display: none; }
+
+.project-visual {
+  position: relative;
+  aspect-ratio: 1.15;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #171923;
+  border: 1px solid var(--line);
+}
+
+.project-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .65s;
+}
+
+.project:hover .project-visual img { transform: scale(1.06); }
+
+.project-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-placeholder::before {
+  content: "";
+  position: absolute;
+  width: 65%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffffff12;
+  filter: blur(1px);
+}
+
+.project-placeholder .graphic {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font: 800 clamp(25px,4vw,52px)/.95 Syne, sans-serif;
+  letter-spacing: -2px;
+  transition: transform .5s;
+}
+
+.project:hover .graphic { transform: rotate(-5deg) scale(1.08); }
+
+.project-placeholder .graphic small {
+  display: block;
+  margin-top: 14px;
+  font: 500 9px 'Space Grotesk', sans-serif;
+  letter-spacing: 4px;
+}
+
+.visual-1 { background: linear-gradient(135deg,#f7c65c,#e8703d 50%,#782e4b); color:#311c20; }
+.visual-2 { background: linear-gradient(135deg,#a4b3ff,#7663d9 50%,#30244e); color:#fff; }
+.visual-3 { background: linear-gradient(135deg,#e7e0d1,#aaa58f 50%,#5c6250); color:#263125; }
+.visual-4 { background: linear-gradient(135deg,#92ded6,#327d8b 50%,#182f50); color:#fff; }
+.visual-5 { background: linear-gradient(135deg,#f8a6c6,#c94e83 50%,#4b1c4c); color:#fff; }
+.visual-6 { background: linear-gradient(135deg,#f0e4b0,#a2ad72 50%,#33432c); color:#253021; }
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 45%, #0008);
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 17px;
+  opacity: 0;
+  transition: .3s;
+}
+
+.project:hover .project-overlay { opacity: 1; }
+
+.project-overlay button {
+  border: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: #111;
+  font-size: 19px;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 15px;
+  padding: 17px 1px;
+}
+
+.project-meta h3 {
+  font: 600 17px Syne, sans-serif;
+  margin-bottom: 7px;
+}
+
+.project-meta p {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.project-number { color: #717480; font-size: 11px; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 65px;
+  align-items: start;
+}
+
+.about-visual {
+  min-height: 400px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 38%, #c9ff6230, transparent 35%),
+    linear-gradient(145deg, #20242c, #101117);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-monogram {
+  font: 800 clamp(100px,17vw,180px)/1 Syne, sans-serif;
+  letter-spacing: -15px;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--lime);
+  transform: rotate(-8deg);
+  text-shadow: 0 0 65px #c9ff6220;
+}
+
+.about-sticker {
+  position: absolute;
+  bottom: 20px;
+  right: 18px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: var(--lime);
+  color: #10120b;
+  font-size: 10px;
+  font-weight: 700;
+  transform: rotate(-4deg);
+}
+
+.about-text > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2;
+  margin-top: 20px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.stat {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #ffffff04;
+}
+
+.stat strong {
+  display: block;
+  font: 700 24px Syne, sans-serif;
+  color: var(--lime);
+  margin-bottom: 6px;
+}
+
+.stat span { color: var(--muted); font-size: 10px; }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 13px;
+  margin-top: 40px;
+}
+
+.skill {
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 23px 16px;
+  background: linear-gradient(145deg,#ffffff07,#ffffff01);
+  transition: .3s;
+}
+
+.skill:hover {
+  transform: translateY(-7px);
+  border-color: #c9ff6266;
+  background: #c9ff6208;
+}
+
+.skill-icon {
+  font-size: 25px;
+  margin-bottom: 18px;
+}
+
+.skill h3 {
+  font: 600 14px Syne, sans-serif;
+  margin-bottom: 9px;
+}
+
+.skill p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.contact-panel {
+  border: 1px solid #c9ff6235;
+  border-radius: 22px;
+  padding: clamp(28px,6vw,65px);
+  background:
+    radial-gradient(ellipse at 100% 0%, #c9ff6210, transparent 50%),
+    #ffffff03;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-panel h2 {
+  font: 700 clamp(38px,7vw,76px)/1.05 Syne, sans-serif;
+  letter-spacing: -3px;
+}
+
+.contact-panel h2 span { color: var(--lime); }
+
+.contact-panel > p {
+  max-width: 450px;
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 13px;
+  margin: 22px 0 27px;
+}
+
+.contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer {
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.footer b { color: var(--lime); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cursor-glow {
+  position: fixed;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: #c9ff6208;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+  transform: translate(-50%,-50%);
+}
+
+@media (pointer: coarse) {
+  .cursor-glow { display: none; }
+}
+
+@media (max-width: 850px) {
+  .hero-grid { grid-template-columns: 1fr  .7fr; gap: 10px; }
+  .hero-art { min-height: 330px; }
+  .art-ring { width: 270px; }
+  .orb { width: 140px; height: 140px; }
+  .art-title { font-size: 30px; }
+  .about-grid { gap: 30px; }
+  .skills-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+@media (max-width: 650px) {
+  .menu-btn { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 5%;
+    width: 90%;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: #101117f5;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+  }
+
+  .nav-links.open { display: flex; }
+  .nav-contact { text-align: center; }
+
+  .hero { padding-top: 130px; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero h1 { letter-spacing: -3px; }
+  .hero-desc { font-size: 13px; }
+  .hero-art { min-height: 350px; margin-top: 20px; }
+  .art-card { width: 245px; }
+  .floating-tag { right: 4%; }
+  section.content-section { padding: 80px 0; }
+
+  .section-head {
+    align-items: start;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  .section-copy { max-width: 100%; }
+  .projects { grid-template-columns: 1fr; gap: 10px; }
+  .project-visual { aspect-ratio: 1.18; }
+  .project-overlay { opacity: 1; }
+  .project-meta h3 { font-size: 16px; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 30px; }
+  .about-visual { min-height: 310px; }
+  .about-monogram { font-size: 145px; }
+  .skills-grid { gap: 10px; }
+  .skill { padding: 19px 13px; }
+
+  .contact-panel h2 { letter-spacing: -2px; }
+  .footer { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAVIGATION -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">ALDIANO<span>®</span></a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#work">Projects</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact" class="nav-contact">Let's Talk ↗</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="status">
+        <span class="status-dot"></span>
+        CREATIVE PORTFOLIO · DKV
+      </div>
+
+      <h1>
+        DESIGN<br>
+        WITH<br>
+        <span class="outline">A</span><span class="accent">TTITUDE.</span>
+      </h1>
+
+      <p class="hero-desc">
+        Halo, saya <strong style="color:#fff">Aldiano</strong> —
+        creative visual designer yang tertarik pada desain grafis,
+        branding, fotografi, videografi, dan visual storytelling.
+        Saya mengubah ide menjadi karya visual yang berkarakter.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">Explore My Work <span>↘</span></a>
+        <a href="#about" class="btn btn-secondary">About Me ↗</a>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="art-ring"></div>
+
+      <div class="art-card">
+        <div class="art-top">
+          <span>ALD® STUDIO</span>
+          <span>001 — 026</span>
+        </div>
+
+        <div class="orb"></div>
+
+        <div class="art-title">
+          THINK<br>
+          <span>CREATE.</span>
+          REPEAT.
+        </div>
+
+        <div class="art-bottom">
+          <span>VISUAL EXPERIMENT</span>
+          <span>EST. 2026</span>
+        </div>
+      </div>
+
+      <div class="floating-tag">
+        <strong>100% CREATIVE</strong>
+        Always exploring new ideas.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RUNNING TEXT -->
+<div class="marquee" aria-label="Creative disciplines">
+  <div class="marquee-track">
+    <span>GRAPHIC DESIGN <b>✳</b> BRANDING <b>✳</b> PHOTOGRAPHY <b>✳</b> VIDEOGRAPHY <b>✳</b> VISUAL STORYTELLING <b>✳</b></span>
+    <span>GRAPHIC DESIGN <b>✳</b> BRANDING <b>✳</b> PHOTOGRAPHY <b>✳</b> VIDEOGRAPHY <b>✳</b> VISUAL STORYTELLING <b>✳</b></span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="content-section" id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">01 / SELECTED WORK</p>
+        <h2 class="section-title">Ideas into<br><span>visuals.</span></h2>
+      </div>
+
+      <p class="section-copy">
+        Eksplorasi konsep, warna, tipografi, dan komposisi.
+        Berikut beberapa contoh konsep visual untuk mengisi portofoliomu.
+      </p>
+    </div>
+
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="branding">Branding</button>
+      <button class="filter-btn" data-filter="graphic">Graphic Design</button>
+      <button class="filter-btn" data-filter="photo">Photography</button>
+      <button class="filter-btn" data-filter="video">Video</button>
+    </div>
+
+    <div class="projects">
+
+      <article class="project reveal" data-category="branding">
+        <div class="project-visual">
+          <div class="project-placeholder visual-1">
+            <div class="graphic">
+              BLOOMÉ
+              <small>BOTANICAL BODY MIST</small>
+            </div>
+          </div>
+          <div class="project-overlay">
+            <span>01 / BRAND IDENTITY</span>
+            <button aria-label="Lihat proyek Bloomé" data-project="Bloomé — Brand Identity">↗</button>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <h3>Bloomé — Brand Identity</h3>
+            <p>Branding / Packaging / Art Direction</p>
+          </div>
+          <span class="project-number">01</span>
+        </div>
+      </article>
+
+      <article class="project reveal" data-category="graphic">
+        <div class="project-visual">
+          <div class="project-placeholder visual-2">
+            <div class="graphic">
+              THINK<br>DIFFERENT.
+              <small>VISUAL CAMPAIGN 026</small>
+            </div>
+          </div>
+          <div class="project-overlay">
+            <span>02 / CAMPAIGN</span>
+            <button aria-label="Lihat proyek Think Different" data-project="Think Different — Campaign">↗</button>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <h3>Think Different</h3>
+            <p>Poster / Typography / Campaign</p>
+          </div>
+          <span class="project-number">02</span>
+        </div>
+      </article>
+
+      <article class="project reveal" data-category="branding">
+        <div class="project-visual">
+          <div class="project-placeholder visual-3">
+            <div class="graphic">
+              ARASI
+              <small>SPECIALTY COFFEE</small>
+            </div>
+          </div>
+          <div class="project-overlay">
+            <span>03 / VISUAL IDENTITY</span>
+            <button aria-label="Lihat proyek Arasi" data-project="Arasi — Coffee Branding">↗</button>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <h3>Arasi Coffee</h3>
+            <p>Logo / Brand System / Packaging</p>
+          </div>
+          <span class="project-number">03</span>
+        </div>
+      </article>
+
+      <article class="project reveal" data-category="photo">
+        <div class="project-visual">
+          <div class="project-placeholder visual-4">
+            <div class="graphic">
+              FRAME<br>THE FEELING
+              <small>PHOTOGRAPHY SERIES</small>
+            </div>
+          </div>
+          <div class="project-overlay">
+            <span>04 / PHOTOGRAPHY</span>
+            <button aria-label="Lihat proyek fotografi" data-project="Frame the Feeling — Photography">↗</button>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <h3>Frame the Feeling</h3>
+            <p>Photography / Composition</p>
+          </div>
+          <span class="project-number">04</span>
+        </div>
+      </article>
+
+      <article class="project reveal" data-category="video">
+        <div class="project-visual">
+          <div class="project-placeholder visual-5">
+            <div class="graphic">
+              MOTION<br>MATTERS
+              <small>VISUAL FILM PROJECT</small>
+            </div>
+          </div>
+          <div class="project-overlay">
+            <span>05 / MOTION</span>
+            <button aria-label="Lihat proyek video" data-project="Motion Matters — Video Project">↗</button>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <h3>Motion Matters</h3>
+            <p>Videography / Editing / Storytelling</p>
+          </div>
+          <span class="project-number">05</span>
+        </div>
+      </article>
+
+      <article class="project reveal" data-category="graphic">
+        <div class="project-visual">
+          <div class="project-placeholder visual-6">
+            <div class="graphic">
+              FORM<br>FOLLOWS
+              <small>DESIGN EXPERIMENT</small>
+            </div>
+          </div>
+          <div class="project-overlay">
+            <span>06 / EXPERIMENT</span>
+            <button aria-label="Lihat proyek Form Follows" data-project="Form Follows — Graphic Experiment">↗</button>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <h3>Form Follows</h3>
+            <p>Graphic Design / Art Direction</p>
+          </div>
+          <span class="project-number">06</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="content-section" id="about">
+  <div class="container about-grid">
+    <div class="about-visual reveal">
+      <div class="about-monogram">A.</div>
+      <div class="about-sticker">CREATIVE MIND ↗</div>
+    </div>
+
+    <div class="about-text reveal">
+      <p class="eyebrow">02 / ABOUT ME</p>
+      <h2 class="section-title">Curious mind.<br><span>Creative soul.</span></h2>
+
+      <p>
+        Saya Aldiano, siswa jurusan Desain Komunikasi Visual (DKV).
+        Saya senang mengeksplorasi ide, mempelajari hal baru,
+        dan membangun komunikasi melalui visual yang menarik.
+      </p>
+
+      <p>
+        Minat saya mencakup desain grafis, branding, fotografi,
+        videografi, dan editing video. Saya percaya desain yang baik
+        bukan hanya terlihat menarik, tetapi juga menyampaikan pesan
+        dengan jelas dan memiliki tujuan.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>01</strong>
+          <span>Creative Thinking</span>
+        </div>
+        <div class="stat">
+          <strong>∞</strong>
+          <span>Ideas to Explore</span>
+        </div>
+        <div class="stat">
+          <strong>DKV</strong>
+          <span>Creative Field</span>
+        </div>
+        <div class="stat">
+          <strong>026</strong>
+          <span>My Creative Journey</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="content-section" id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">03 / WHAT I DO</p>
+        <h2 class="section-title">Creative<br><span>toolbox.</span></h2>
+      </div>
+      <p class="section-copy">
+        Bidang yang saya minati dan terus kembangkan
+        dalam perjalanan belajar desain.
+      </p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill reveal">
+        <div class="skill-icon">✳</div>
+        <h3>Graphic Design</h3>
+        <p>Layout, poster, typography, dan visual communication.</p>
+      </div>
+
+      <div class="skill reveal">
+        <div class="skill-icon">◈</div>
+        <h3>Branding</h3>
+        <p>Logo, warna, identitas visual, dan brand concept.</p>
+      </div>
+
+      <div class="skill reveal">
+        <div class="skill-icon">◎</div>
+        <h3>Photography</h3>
+        <p>Komposisi, pencahayaan, dan visual storytelling.</p>
+      </div>
+
+      <div class="skill reveal">
+        <div class="skill-icon">▷</div>
+        <h3>Videography</h3>
+        <p>Video shooting, editing, motion, dan storytelling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="content-section" id="contact">
+  <div class="container">
+    <div class="contact-panel reveal">
+      <p class="eyebrow">04 / GET IN TOUCH</p>
+      <h2>Have an idea?<br><span>Let's create.</span></h2>
+
+      <p>
+        Punya proyek, ide kreatif, atau ingin berkolaborasi?
+        Hubungi saya dan mari kita wujudkan sesuatu yang menarik.
+      </p>
+
+      <div class="contact-details">
+        <!-- GANTI URL INSTAGRAM DI BAWAH -->
+        <a class="btn btn-primary"
+           href="https://www.instagram.com/aldianoz_/"
+           target="_blank" rel="noopener noreferrer">
+          Instagram ↗
+        </a>
+
+        <!-- GANTI EMAIL DENGAN EMAIL AKTIFMU -->
+        <a class="btn btn-secondary"
+           href="mailto:emailkamu@example.com">
+          Send an Email ↗
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer">
+    <span>© 2026 <b>ALDIANO®</b> — CREATIVE PORTFOLIO</span>
+    <span>DESIGNED WITH INTENTION. BUILT WITH CURIOSITY.</span>
+    <a href="#home">BACK TO TOP ↑</a>
+  </div>
+</footer>
+
+<script>
+// MOBILE NAVIGATION
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+
+menuBtn.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(isOpen));
+  menuBtn.textContent = isOpen ? '✕' : '☰';
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.textContent = '☰';
+  });
+});
+
+// NAVBAR EFFECT
+const navbar = document.getElementById('navbar');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 30);
+}, { passive: true });
+
+// SCROLL REVEAL
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// PROJECT FILTER
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projects = document.querySelectorAll('.project');
+
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    const category = button.dataset.filter;
+
+    projects.forEach(project => {
+      const match = category === 'all' ||
+                    project.dataset.category === category;
+
+      project.classList.toggle('hidden', !match);
+    });
+  });
+});
+
+// PROJECT DEMO ACTION
+document.querySelectorAll('[data-project]').forEach(button => {
+  button.addEventListener('click', () => {
+    alert(
+      button.dataset.project +
+      '\n\nIni contoh proyek portofolio. Ganti dengan gambar, ' +
+      'deskripsi, atau halaman detail karya aslimu.'
+    );
+  });
+});
+
+// SUBTLE MOUSE GLOW — desktop only
+const glow = document.getElementById('cursorGlow');
+
+if (window.matchMedia('(pointer: fine)').matches) {
+  window.addEventListener('pointermove', event => {
+    glow.style.left = event.clientX + 'px';
+    glow.style.top = event.clientY + 'px';
+  }, { passive: true });
+}
+</script>
+
+</body>
+</html>
